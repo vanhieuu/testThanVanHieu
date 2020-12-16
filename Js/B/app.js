@@ -1,48 +1,49 @@
 var url = "https://opentdb.com/api.php?amount=5&category=21&difficulty=easy&type=multiple";
 // const $main = document.getElementById(`main`);
 function print(question) {
-    for (var i = 0; i < question.length ; i++) {
+    for (var i = 0; i < question.length; i++) {
         const quest = question[i];
-        console.log(`#${i+1}`);
-            for (const key in quest) {
-                    const value = quest[key];
-                    console.log(`${key} : ${value}`)
-}
+        console.log(`#${i + 1}`);
+        for (const key in quest) {
+            const value = quest[key];
+            console.log(`${key} : ${value}`)
         }
     }
-let question = fetch(url)
+}
+let questions = fetch(url)
     .then((response) => response.json())
     .then((data => {
-            print(data.results)
-        console.log(data.results)}));
-    
-      // .then((data) => {
-    //     data.forEach((result) => {
-    //         $main.innerHTML += `
-    //     <div>Category: ${result.category}</div>
-    //     <div>Type: ${result.type} </div>
-    //     <div>Difficulty: ${result.difficulty} </div>
-    //     <div>Question: ${result.question} </div>
-    //     <div>CorrectAnswer: ${result.correct_answer} </div>
-    //     <div>Incorrectanswers: ${result.incorrect_answers} </div>
-    //     --------------------------------------------
-    //     `
-    //     })
-    // });
-    let rightAnswerMessages = [
-        `Yeahhh! Chính xác <i class="far fa-2x fa-laugh-squint"></i>`,
-        `Wow, ghê đấy <i class="far fa-2x fa-grin-stars"></i>`,
-        `Bạn đã trả lời đúng! <i class="far fa-2x fa-kiss"></i>`,
-        `Ngon, tiếp nào... <i class="far fa-2x fa-grin-alt"></i>`,
-    ]
-    
-    let wrongAnswerMessages = [
-        `Hả? Sai rồi. <i class="far fa-2x fa-flushed"></i>`,
-        `Sai rồi nha. Cố lên <i class="far fa-2x fa-grin-beam-sweat"></i>`,
-        `Bạn đã trả lời sai! <i class="far fa-2x fa-meh"></i>`,
-        `Có gì đó không đúng? <i class="far fa-2x fa-meh-rolling-eyes"></i>`,
-    ]
-    let suffleQuest;
+        print(data.results)
+        console.log(data.results)
+   
+
+// .then((data) => {
+//     data.forEach((result) => {
+//         $main.innerHTML += `
+//     <div>Category: ${result.category}</div>
+//     <div>Type: ${result.type} </div>
+//     <div>Difficulty: ${result.difficulty} </div>
+//     <div>Question: ${result.question} </div>
+//     <div>CorrectAnswer: ${result.correct_answer} </div>
+//     <div>Incorrectanswers: ${result.incorrect_answers} </div>
+//     --------------------------------------------
+//     `
+//     })
+// });
+let rightAnswerMessages = [
+    `Yeahhh! Chính xác <i class="far fa-2x fa-laugh-squint"></i>`,
+    `Wow, ghê đấy <i class="far fa-2x fa-grin-stars"></i>`,
+    `Bạn đã trả lời đúng! <i class="far fa-2x fa-kiss"></i>`,
+    `Ngon, tiếp nào... <i class="far fa-2x fa-grin-alt"></i>`,
+]
+
+let wrongAnswerMessages = [
+    `Hả? Sai rồi. <i class="far fa-2x fa-flushed"></i>`,
+    `Sai rồi nha. Cố lên <i class="far fa-2x fa-grin-beam-sweat"></i>`,
+    `Bạn đã trả lời sai! <i class="far fa-2x fa-meh"></i>`,
+    `Có gì đó không đúng? <i class="far fa-2x fa-meh-rolling-eyes"></i>`,
+]
+let suffleQuest;
 
 let userResult = 0;
 
@@ -52,7 +53,7 @@ let totalQuestion = 0;
 newGame();
 function submitAnswer() {
     if (checkHasAnswer()) {
-        let nameAnswer = "answer_" + currentQuestion.question;
+        let nameAnswer = "answer_" + currentQuestion.category;
         let right = true;
         for (let i = 0; i < document.getElementsByName(nameAnswer).length; i++) {
             let answer = document.getElementsByName(nameAnswer)[i];
@@ -73,7 +74,7 @@ function submitAnswer() {
 }
 function checkHasAnswer() {
     let hasAnswer = false;
-    let nameAnswer = "answer_" + currentQuestion.question;
+    let nameAnswer = "answer_" + currentQuestion.category;
     for (let i = 0; i < document.getElementsByName(nameAnswer).length; i++) {
         let answer = document.getElementsByName(nameAnswer)[i];
         if (answer.checked) {
@@ -97,13 +98,13 @@ function nextQuestion() {
 function preParaForNextQuestion() {
     document.getElementById('btnSubmitAnswer').style.display = 'none';
     document.getElementById('btnNextQuestion').style.display = 'block';
-}function displayQuestion(cQuestion, indexQuestion) {
+} function displayQuestion(cQuestion, indexQuestion) {
     document.getElementById("indexQuestion").innerHTML = indexQuestion;
     document.getElementById("totalQuestion").innerHTML = totalQuestion;
     document.getElementById("contentQuestion").innerHTML = standardContentQuestion(cQuestion.question);
     document.getElementById("answerQuestion").innerHTML = "";
     let tblAnswert = '';
-    if(cQuestion.isMultiAnswer){
+    if (cQuestion.isMultiAnswer) {
         for (let i = 0; i < cQuestion.answer.length; i++) {
             const answer = cQuestion.answer[i];
             tblAnswert += `<li>
@@ -113,7 +114,7 @@ function preParaForNextQuestion() {
                             </label>
                         </li>`;
         }
-    }else{
+    } else {
         for (let i = 0; i < cQuestion.answer.length; i++) {
             const answer = cQuestion.answer[i];
             tblAnswert += `<li>
@@ -127,12 +128,12 @@ function preParaForNextQuestion() {
     document.getElementById("answerQuestion").innerHTML = tblAnswert;
 }
 
-function standardContentQuestion(content){
+function standardContentQuestion(content) {
     return content.replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;');
+        .replace(/>/g, '&gt;');
 }
 
-function onToggleSelected(e){
+function onToggleSelected(e) {
     console.dir(e.target.parentElement);
     e.target.parentElement.classList.toggle('selected');
 }
@@ -155,7 +156,7 @@ function rightAnswer() {
     userResult++;
 }
 
-function getRandomMessage(listMessages){
+function getRandomMessage(listMessages) {
     let ran = Math.floor(Math.random() * listMessages.length);
     return listMessages[ran];
 }
@@ -191,15 +192,15 @@ function newGame() {
 }
 
 function suffleQuestF() {
-    let copy = JSON.parse(JSON.stringify(question));
+    let copy = JSON.parse(JSON.stringify(data.results));
     let result = [];
-    while(copy.length > 0){
+    while (copy.length > 0) {
         let i = Math.floor(Math.random() * copy.length);
         result.push(copy.splice(i, 1)[0]);
     }
     return result;
 }
-    
+
     // .then((data) => {
     //     data.forEach((result) => {
     //         $main.innerHTML += `
@@ -213,3 +214,4 @@ function suffleQuestF() {
     //     `
     //     })
     // });
+}));
