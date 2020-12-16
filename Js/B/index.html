@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Trắc nghiệm Javascript</title>
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="container">
+    <nav class="nav">
+      <a class="nav-link active" href="">Home</a>
+    </nav>
+    <div id="introduction">
+      <h1>Chào mừng bạn tới bài trắc nghiệm Javascript</h1>
+      <p>Đây là mô tả</p>
+    </div>
+    <div id="playing">
+      <div id="content">
+        <div>Câu hỏi: <span id="indexQuestion"></span> / <span id="totalQuestion"></span></div>
+        <div class="content-question-answer">
+          <div id="contentQuestion"></div>
+          <div>
+            <ol id="answerQuestion" type="A">
+
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="result-and-button">
+        <div id="rightAnswer" class="alert alert-success animated bounceIn duration-05s">
+          <div>Yeahhh! Chính xác</div>
+        </div>
+        <div id="wrongAnswer" class="alert alert-danger animated bounce">
+          <div>Trả lời không đúng</div>
+        </div>
+        <div id="needAnswer" class="alert alert-warning animated zoomIn duration-05s">
+          Chưa trả lời mà <i class="far fa-2x fa-meh"></i>
+        </div>
+        <div id="submitAnswer">
+          <button type="button" id="btnSubmitAnswer" class="btn btn-success btn-center" onclick="submitAnswer()">Kiểm tra</button>
+          <button type="button" id="btnNextQuestion" class="btn btn-primary btn-center" onclick="nextQuestion()">Kế tiếp</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="result">
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Chúc mừng!</h4>
+        <p id="userResult"></p>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary" onclick="newGame()">New game</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
