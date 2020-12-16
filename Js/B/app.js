@@ -53,7 +53,7 @@ let totalQuestion = 0;
 newGame();
 function submitAnswer() {
     if (checkHasAnswer()) {
-        let nameAnswer = "answer_" + currentQuestion.category;
+        let nameAnswer = "answer_" + currentQuestion.correct_answer + currentQuestion.incorrect_answer;
         let right = true;
         for (let i = 0; i < document.getElementsByName(nameAnswer).length; i++) {
             let answer = document.getElementsByName(nameAnswer)[i];
